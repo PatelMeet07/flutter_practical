@@ -9,12 +9,12 @@ import '../../../core/services/network_error.dart';
 import '../../../core/utils/api_constants.dart';
 
 class HomeScreenService {
-  Future<Result<AppException, CategoryModelResp>>
-      getHomeScreenCategory() async {
+  Future<Result<AppException, CategoryModelResp>> getHomeScreenCategory(
+      {int pageIndex = 1}) async {
     Map<String, dynamic> data = {
       "CategoryId": 0,
       "DeviceToken": "",
-      "PageIndex": 1,
+      "PageIndex": pageIndex,
     };
 
     try {

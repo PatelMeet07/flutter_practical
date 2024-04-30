@@ -13,11 +13,28 @@ class HomeController extends GetxController
   late TabController tabController;
   RxList<Category> tabData = RxList.empty(growable: true);
   RxBool isLoading = false.obs;
+  ScrollController subcategoryProductController = ScrollController();
+  int pageIndex = 1;
+  RxBool isLoadMore = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     getAllTabData();
+
+    // subcategoryProductController.addListener(() async {
+    //   if (subcategoryProductController.position.maxScrollExtent ==
+    //           subcategoryProductController.offset &&
+    //       isLoadMore.isTrue) {
+    //   }
+    // });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    tabController.dispose();
+    subcategoryProductController.dispose();
   }
 
   getAllTabData() async {
@@ -27,10 +44,11 @@ class HomeController extends GetxController
     isLoading.value = false;
   }
 
-  // Fetch all expenses for single property
+  // Fetch all categories data
   Future<void> getAllCategoryTitles() async {
     if (await isNetworkConnected()) {
-      final response = await HomeScreenService().getHomeScreenCategory();
+      final response =
+          await HomeScreenService().getHomeScreenCategory(pageIndex: pageIndex);
       response.when(
         success: (categoryData) {
           if (categoryData.status == 200) {

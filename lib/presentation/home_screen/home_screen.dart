@@ -61,7 +61,7 @@ Widget _homeContentWidget(BuildContext context, HomeController controller) {
                     controller: controller.tabController,
                     children: controller.tabData.map((element) {
                       return element.subCategories != null
-                          ? showSubcategoriesWidgetList(element)
+                          ? showSubcategoriesWidgetList(element, controller)
                           : Center(
                               child: Text(
                                 element.Name.toString(),
@@ -76,7 +76,8 @@ Widget _homeContentWidget(BuildContext context, HomeController controller) {
   );
 }
 
-Widget showSubcategoriesWidgetList(Category element) {
+Widget showSubcategoriesWidgetList(
+    Category element, HomeController controller) {
   return ListView.separated(
     padding: getPadding(bottom: 36, top: 24),
     separatorBuilder: (context, index) {
@@ -97,6 +98,7 @@ Widget showSubcategoriesWidgetList(Category element) {
           SizedBox(
             height: getSize(100.00),
             child: ListView.separated(
+              controller: controller.subcategoryProductController,
               separatorBuilder: (context, index) {
                 return SizedBox(
                   width: getHorizontalSize(20.0),
