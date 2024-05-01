@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practical/core/common/custom_icon_button.dart';
 import 'package:flutter_practical/core/utils/image_constant.dart';
 import 'package:flutter_practical/core/utils/screen_utils.dart';
+import 'package:flutter_practical/routes/app_routes.dart';
+import 'package:get/get.dart';
 
 class CustomActionBar extends StatelessWidget {
   const CustomActionBar({super.key});
@@ -15,7 +17,9 @@ class CustomActionBar extends StatelessWidget {
         children: [
           CustomIconButton(
             svgAssetPath: ImageConstant.iconFilter,
-            onButtonTap: () {},
+            onButtonTap: () {
+              Get.toNamed(AppRoutes.stripScreen);
+            },
           ),
           CustomIconButton(
             svgAssetPath: ImageConstant.iconSearch,

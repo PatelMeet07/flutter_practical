@@ -96,7 +96,7 @@ Widget showSubcategoriesWidgetList(
           ),
           SizedBox(height: getVerticalSize(16)),
           SizedBox(
-            height: getSize(100.00),
+            height: getSize(110.00),
             child: ListView.separated(
               controller: controller.subcategoryProductController,
               separatorBuilder: (context, index) {
@@ -109,18 +109,35 @@ Widget showSubcategoriesWidgetList(
               itemBuilder: (context, productIndex) {
                 final subCategoryProductItem =
                     subCategoryItem?.product?[productIndex];
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: CachedNetworkImage(
-                    imageUrl: subCategoryProductItem?.ImageName ?? '',
-                    width: getSize(80),
-                    height: getSize(80),
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: AppColors.greyScale400,
-                      width: getSize(80),
-                      height: getSize(80),
-                    ),
+                return SizedBox(
+                  width: getHorizontalSize(80),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: CachedNetworkImage(
+                          imageUrl: subCategoryProductItem?.ImageName ?? '',
+                          width: getSize(80),
+                          height: getSize(80),
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            color: AppColors.greyScale400,
+                            width: getSize(80),
+                            height: getSize(80),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: getVerticalSize(8)),
+                      Text(
+                        subCategoryProductItem?.Name ?? '',
+                        style: TextStyle(
+                          fontSize: getFontSize(12),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
+                      ),
+                    ],
                   ),
                 );
               },
